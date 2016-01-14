@@ -1,0 +1,133 @@
+<html>
+<head>
+<link rel="stylesheet" href="base16-light.css">
+<link rel="stylesheet" href="codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="https://jbt.github.io/markdown-editor/default.css">
+<style>
+    body {margin-left: 1em; margin-top: 2em;}
+
+    .emoji {
+      width: 1em;
+      height: 1em;
+      vertical-align: baseline;
+    }
+
+    @media screen and (max-width: 1024px) {
+      #in {
+        display: none;
+      }
+      #out {
+        left: 0;
+        padding-left: 10px;
+      }
+    }
+
+    .cm-header-1 { font-size: 2em; }
+    .cm-header-2 { font-size: 1.75em; }
+    .cm-header-3 { font-size: 1.5em; }
+    .cm-header-4 { font-size: 1.3em; }
+    .cm-header-5 { font-size: 1.2em; }
+    .cm-header-6 { font-size: 1.15em; }
+
+    .cm-quote { color: #90a959; font-style: italic; }
+
+    .view #in {
+      display: none;
+    }
+    .view #out {
+      left: 0;
+      padding-left: 10px;
+    }
+
+    a{ color: #0645ad; text-decoration:none;}
+    a:visited{ color: #0b0080; }
+    a:hover{ color: #06e; }
+    a:active{ color:#faa700; }
+    a:focus{ outline: thin dotted; }
+    a:hover, a:active{ outline: 0; }
+
+    p{margin:1em 0;}
+
+    img{max-width:100%;}
+
+    h1,h2,h3,h4,h5,h6{font-weight:normal;color:#111;line-height:1em;}
+    h4,h5,h6{ font-weight: bold; }
+    h1{ font-size:2.5em; }
+    h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+    h3{ font-size:1.5em; }
+    h4{ font-size:1.2em; }
+    h5{ font-size:1em; }
+    h6{ font-size:0.9em; }
+
+    blockquote{color:#666666;margin:0;padding-left: 3em;border-left: 0.5em #EEE solid;}
+    hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+    pre, code{
+      color: #000;
+      font-family:Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 0.94em; /* 0.94 = 0.88 + (1.00 - 0.88) / 2 */
+      border-radius:3px;
+      background-color: #F8F8F8;
+      border: 1px solid #CCC;
+    }
+    pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
+    pre code { border: 0px !important; background: transparent !important; line-height: 1.3em; }
+    code { padding: 0 3px 0 3px; }
+    sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+    sup { top: -0.5em; }
+    sub { bottom: -0.25em; }
+    ul, ol { margin: 0.5em 0; padding: 0 0 0 2em; }
+    li p:last-child { margin:0 }
+    dd { margin: 0 0 0 2em; }
+    img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+    table { border-collapse: collapse; border-spacing: 0; }
+    td, th { vertical-align: top; padding: 4px 10px; border: 1px solid #bbb; }
+    tr:nth-child(even) td, tr:nth-child(even) th { background: #eee; }
+  </style>
+</head>
+<body>
+<h1>Python Unit Testing Notes</h1>
+<p>\\stlsevsprd01\transfer\public_dropbox\UnitTesting_workshop\2016_01_Python_Unit_Testing.zip</p>
+<h3>Intro</h3>
+<ul>
+<li>What is Unit Testing?
+<ul>
+<li>"A unit test is an automated test that verifies the correctness of an independent unit of code."</li>
+<li><strong>"A testing unit should focus on one tiny bit of functionality and prove it correct."</strong></li>
+<li>Two important ideas here:
+<ol>
+<li>Automated
+<ul>
+<li>Write once, run many, <em>many</em> times</li>
+<li>Easily verify your code before committing to version control or pushing it to a server
+<ul>
+<li>This can also be done automatically by CI or IDE</li>
+</ul>
+</li>
+<li>Run before and after a coding session, so you can be sure that you didn't break anything</li>
+<li>Make changes to old code without the hassle of figuring out what needs to be manually tested</li>
+</ul>
+</li>
+<li>Units
+<ul>
+<li>To really be verified by a unit test, the code being tested should be as free from dependencies and side effects as possible</li>
+<li>This requirement for <strong>modular</strong> code will make your work more <strong>reusable</strong> and <strong>maintainable</strong></li>
+<li>Code that is independent enough to be unit tested will be much less likely to cause problems in other areas of your program</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Some principles of Unit Testing:</h3>
+<ul>
+<li>Each test should be independent. You should be able to call just one test, or all of them, in any order, and have the results be correct.</li>
+<li>Try hard to make your tests run quickly - if the tests take too long to run, they may not be run as often as they should be.</li>
+<li>The first step when you are debugging your code is to write a new test pinpointing the bug. While it is not always possible to do, those bug catching tests are among the most valuable pieces of code in your project.</li>
+<li>Use long and descriptive names for testing functions. These function names are displayed when a test fails, and should be as descriptive as possible.</li>
+<li>When something goes wrong or has to be changed, and if your code has a good set of tests, you or other maintainers will rely largely on the testing suite to fix the problem or modify a given behavior. Therefore the testing code will be read as much as or even more than the running code. A unit test whose purpose is unclear is not very helpful in this case.</li>
+<li>Another use of the testing code is as an introduction to new developers. When someone will have to work on the code base, running and reading the related testing code is often the best they can do. They will or should discover the hot spots, where most difficulties arise, and the corner cases. If they have to add some functionality, the first step should be to add a test and, by this means, ensure the new functionality is not already a working path that has not been plugged into the interface.</li>
+</ul>
+</body>
+</html>
