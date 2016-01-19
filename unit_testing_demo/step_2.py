@@ -1,5 +1,6 @@
 import csv
 import operator
+from functools import reduce
 
 class CsvNumberManipulator:
     def __init__(self, infile_path):

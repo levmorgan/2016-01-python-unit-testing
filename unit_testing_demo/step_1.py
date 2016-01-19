@@ -1,4 +1,5 @@
 import operator
+from functools import reduce
 
 def get_array_product(number_array):
     if not number_array:
